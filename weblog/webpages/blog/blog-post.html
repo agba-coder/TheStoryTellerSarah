@@ -1,0 +1,316 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %} {{post.title}}  {% endblock %}
+
+{% block content %}
+
+<!-- single post -->
+<section class="text-11 py-5">
+    <div class="text11 py-lg-5 py-md-4">
+        <div class="container">
+            <div class="blog-title px-md-5">
+                <h3 class="title-big">{{post.title}}
+                </h3>
+                <ul class="blog-list">
+                    <li>
+                        <p> Posted <strong>{{post.date_created | timesince}} ago </strong></p>
+                    </li>
+                    <li>
+                        <p> By <a href="#author"><strong>The Story Teller Sarah</strong></a></p>
+                    </li>
+                    <li>
+                        <p> Published in <a href="{% url 'category_detail' post.category.slug %}"><strong>{{post.category}}</strong></a></p>
+                    </li>
+                    <li>
+                        <p><span class="fa fa-clock-o"></span> <strong>{{post.read_duration_in_minutes}} min read</strong></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="image mb-sm-5 mb-4">
+            {% if post.image %}
+            <img src="{{post.image.url}}" alt="" class="img-fluid radius-image-full">
+            {% endif %}
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="text11-content">
+                        <h4 class="mt-sm-3"> {{post.title}}</h4>
+                        <p class="mt-4 mb-3">{{post.body}}.</p>
+                        {% comment %} <h5 class="quote">For dull and lifeless skin, mix apple juice with honey. Apply a thin layer to your face, and leave it for 5 minutes.
+                            <footer class="blockquote-footer mt-3"> Kelvin edison </footer>
+                        </h5> {% endcomment %}
+
+                        <div class="social-share-blog mt-5">
+
+                            <ul class="column3 tags m-0 p-0">
+                                <li>
+                                    <p class="m-0 mr-sm-4 mr-2">Tags :</p>
+                                </li>
+                                <li><a href="#url" class="btn-small">{{post.hash_tag}}</a></li>
+                                {% comment %} <br/>
+                                <br/>
+                                <li><a href="#url" class="btn-small">{{post.hash_tag}}</a></li> {% endcomment %}
+
+                            </ul>
+                            <ul class="column3 social m-0 p-0">
+                                <li>
+                                    <p class="m-0 mr-sm-4 mr-2">Share this post:</p>
+                                </li>
+                                <li><a href="#facebook" class="facebook"><span class="fa fa-facebook-square"></span></a>
+                                </li>
+                                <li><a href="#twitter" class="twitter"><span class="fa fa-twitter"></span></a></li>
+                                <li><a href="#instagram" class="instagram"><span class="fa fa-instagram"></span></a></li>
+                            </ul>
+                        </div>
+                        {% comment %} <div class="new-posts clearfix">
+                            <a class="prev-post pull-left" href="#prev"><span class="fa fa-arrow-left"
+                                    aria-hidden="true"></span>
+                                Previous Post</a>
+                            <a class="next-post pull-right" href="#next">Next Post <span class="fa fa-arrow-right"
+                                    aria-hidden="true"></span></a>
+                        </div> {% endcomment %}
+                    </div>
+
+                </div>
+                <div class="sidebar-side col-lg-4 col-md-12 col-sm-12 mt-lg-0 mt-5">
+                    <aside class="sidebar">
+
+                        <!-- Author card Widget-->
+                        <div class="sidebar-widget sidebar-blog-category">
+                            <div class="author">
+                                <div class="sidebar-title">
+                                    <h4>About Author</h4>
+                                </div>
+                                <div class="author-detalis">
+                                    <a href="#author" class="author-image"><img src="{% static 'images/Omotayo.jpg' %}"
+                                            alt="author image" class="img-fluid"></a>
+                                    <div class="author-info">
+                                        <a href="#author-name" class="author-name">The Story Teller Sarah</a>
+                                        <a href="www.instagram.com/invites/contact/?i=Incn2t1ahyln&utm_content=k526w4f" class="btn btn-outline-primary">Follow </a>
+                                    </div>
+                                </div>
+                                <p class="mt-2">A story telling blog filled with stories, experiences, and lessons from a regular Nigerian Blogger, Alade Sarah Omotayo.</p>
+                            </div>
+                        </div>
+                        <!-- //Author card Widget-->
+
+                        <!--Blog Category Widget-->
+                        {% comment %} <div class="sidebar-widget sidebar-blog-category">
+                            <div class="sidebar-title">
+                                <h4>Categories</h4>
+                            </div>
+                            <ul class="blog-cat">
+                                <li><a href="#url">Beauty </a></li>
+                                <li><a href="#url">Fashion and Style</a></li>
+                                <li><a href="#url">Food and wellness</a></li>
+                                <li><a href="#url">Lifestyle</a></li>
+                            </ul>
+                        </div> {% endcomment %}
+
+
+                        <!-- Popular Post Widget-->
+                        <div class="sidebar-widget popular-posts">
+                            <div class="sidebar-title">
+                                <h4>Recent Posts</h4>
+                            </div>
+                            {% for data in recent_posts %}
+                            <article class="post">
+                                <figure class="post-thumb"><img src="{{data.image.url}}" alt=""></figure>
+                                <div class="text"><a href="{% url 'blog_post' post.category.slug data.slug %}">
+                                    {{data.title}}</a>
+                                </div>
+                                <div class="post-info">{{data.date_created |date:'M d, Y' }}</div>
+                            </article>
+                            {% endfor %}
+
+                            {% comment %} <article class="post">
+                                <figure class="post-thumb"><img src="images/beauty8.jpg" alt=""></figure>
+                                <div class="text"><a href="blog-single.html">
+                                   4 Ways to feel Great during the Cold Weather</a>
+                                </div>
+                                <div class="post-info">June 15, 2020</div>
+                            </article>
+
+                            <article class="post">
+                                <figure class="post-thumb"><img src="images/food3.jpg" alt=""></figure>
+                                <div class="text"><a href="blog-single.html">
+                                    How to Make the Best Japanese Shokupan Veg Bread
+                                    </a></div>
+                                <div class="post-info">June 13, 2020</div>
+                            </article> {% endcomment %}
+
+                            {% comment %} <article class="post">
+                                <figure class="post-thumb"><img src="images/beauty2.jpg" alt=""></figure>
+                                <div class="text"><a href="blog-single.html">
+                                        
+How to get Beautiful coloring Highlights this weak</a>
+                                </div>
+                                <div class="post-info">June 12, 2020</div>
+                            </article> {% endcomment %}
+
+                        </div>
+
+                        <!-- sidebar sticky -->
+                        {% comment %} <div class="sidebar-sticky">
+                            <div class="sidebar-sticky-fix">
+                                <!--Blog Category Widget-->
+                                <div class="sidebar-widget sidebar-blog-category archive">
+                                    <div class="sidebar-title">
+                                        <h4>Twitter feed</h4>
+                                    </div>
+                                    <ul class="blog-cat twitter-feed">
+                                        <li><a href="#url"> Creating an Art that shows the beauty in everyone’s ideas of flaws.
+                                            . #beauty #style #art #creative…</a></li>
+                                        <li><a href="#url">See our lifestyle and beauty posts on twitter. #LifeStyle #Beauty
+                                            </a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div> {% endcomment %}
+                        <!-- //sidebar sticky -->
+
+                    </aside>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="comments">
+                        <h3 class="aside-title ">Recent comments</h3>
+                        <div class="comments-grids">
+                            <div class="media-grid">
+                                {% for comment in post.comments.all %}
+                                <div class="media">
+                                    {% comment %} <a class="comment-img" href="#url"><img src="images/a1.jpg"
+                                            class="img-responsive" width="100px" alt="placeholder image"></a> {% endcomment %}
+                                    <div class="media-body comments-grid-right">
+                                        <h5>{{ comment.name }}</h5>
+                                        <ul class="p-0 comment">
+                                            <li class="">{{ comment.date_created|timesince }} ago</li>
+                                            {% comment %} <li>
+                                                <a href="#comment" class="text-primary">Reply</a>
+                                            </li> {% endcomment %}
+                                        </ul>
+                                        <p>{{ comment.body }}</p>
+
+                                    </div>
+                                </div>
+                                {% empty %}
+                                    <p><strong> No comments yet!.. Be the first to comment.</strong></p>
+                            {% endfor %}
+                            </div> 
+                        </div>
+                            {% comment %} <div class="media-grid">
+                                <div class="media">
+                                    <a class="comment-img" href="#url"><img src="images/a2.jpg"
+                                            class="img-responsive" width="100px" alt="placeholder image"></a>
+                                    <div class="media-body comments-grid-right">
+                                        <h5>Charlie</h5>
+                                        <ul class="p-0 comment">
+                                            <li class="">July 15th, 2020 at 05:45 pm </li>
+                                            <li>
+                                                <a href="#comment" class="text-primary">Reply</a>
+                                            </li>
+                                        </ul>
+                                        <p>Mattis ut hendrerit non, facilisis eget mauris. Sed ultricies nec purus
+                                            quis
+                                            tempor. Phasellus eu nec purus quis tempor.
+                                        </p>
+                                        <div class="media mt-4 mb-0 border-0 px-0 pb-0">
+                                            <a class="comment-img" href="#url"><img src="images/a3.jpg"
+                                                    class="img-responsive" width="100px" alt="placeholder image"></a>
+                                            <div class="media-body comments-grid-right">
+                                                <h5>Jack Harry</h5>
+                                                <ul class="p-0 comment">
+                                                    <li class="">July 15th, 2020 at 11:00 am</li>
+                                                    <li>
+                                                        <a href="#comment" class="text-primary">Reply</a>
+                                                    </li>
+                                                </ul>
+                                                <p>Mattis ut hendrerit non, facilisis eget mauris. Sed ultricies nec
+                                                    purus quis
+                                                    tempor. dolor set.</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> {% endcomment %}
+                        </div>
+                    </div>
+
+
+                    <div class="leave-comment-form" id="comment">
+                        <h3 class="aside-title">Leave a comment</h3>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="input-grids">
+                                <div class="form-group">
+                                    {{form.name}}
+                                </div>
+                                <div class="form-group">
+                                    {{form.email}}
+                                </div>
+                                <div class="form-group">
+                                    {{form.body}}
+                                </div>
+                                
+                            </div>
+                            <div class="submit text-right">
+                                <button class="btn btn-style btn-primary">Post Comment</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- //single post -->
+
+<div class="w3l-homeblock2 py-5">
+    <div class="container py-lg-5 py-md-4">
+        <h3 class="section-title-left mb-4">You may also like </h3>
+        <div class="row">
+            {% for data in previous_posts %}
+            <div class="col-lg-4 col-md-6 item">
+                <div class="card">
+                    <div class="card-header p-0 position-relative">
+                        <a href="{% url 'blog_post' post.category.slug data.slug %}">
+                            <img class="card-img-bottom d-block radius-image-full" src="{{data.image.url}}"
+                                alt="Card image cap">
+                        </a>
+                    </div>
+                    <div class="card-body blog-details">
+                        <span class="label-blue">{{data.category}}</span>
+                        <a href="{% url 'blog_post' post.category.slug data.slug %}" class="blog-desc">{{data.title}}
+                        </a>
+                        <p>{{data.intro}}</p>
+                        <div class="author align-items-center mt-3 mb-1">
+                            <img src="{% static 'images/Omotayo.jpg' %}" alt="" class="img-fluid rounded-circle">
+                            <ul class="blog-meta">
+                                <li>
+                                    <a href="author.html">The Story Teller Sarah</a>
+                                </li>
+                                <li class="meta-item blog-lesson">
+                                    <span class="meta-value"> {{data.date_created}} </span>. <span
+                                        class="meta-value ml-2"><span class="fa fa-clock-o"></span> {{data.read_duration_in_minutes}}
+                                        min</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

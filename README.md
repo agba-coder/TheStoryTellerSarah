@@ -1,2 +1,2 @@
 # TheStoryTellerSarah
-A modern blog built with Python
+A modern personal blog for a friend

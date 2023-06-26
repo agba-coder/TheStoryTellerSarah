@@ -1,0 +1,63 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Login To Your Account {% endblock %}
+
+{% block content %}
+
+<div class="w3l-contact-10 py-5" id="contact">
+  <div class="form-41-mian pt-lg-4 pt-md-3 pb-md-4">
+      <div class="container">
+        {% if messages %}
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <div id="form_errors">
+                {% for message in messages %}
+                <strong> {{message}}</strong>
+                {% endfor %}
+            </div>
+            <button type="buttom" class="close" data-dismiss="alert" arial-label="Close">
+                <span arial-hidden="true">&times:</span>
+            </button>
+        </div>
+        {% endif %}
+          <div class="heading">
+              <h3 class="category-title mb-3"> Sign In</h3>
+              <p class="mb-md-5 mb-4">Login To Your Account.</p>
+          </div>
+          <div class="row">
+              <div class="col-lg-8 form-inner-cont">
+                  <form action="{% url 'login' %}" method="post" class="signin-form">
+                      {% csrf_token %}
+                      <div class="form">
+                          <div class="form-input">
+                              <input type="text" name="username" id="w3lName" placeholder="Username *"
+                                  required="" />
+                          </div>
+                          </br>
+                          </br>
+                          <div class="form-input">
+                              <input type="password" name="password" id="password" placeholder="Password *"
+                                  required />
+                          </div>
+                          
+                      </div>
+                    
+                      <h6 class="mb-md-5 mb-4" style="margin-top: 1rem;margin-bottom: 0rem;font-size: 17px;text-align: right;color: #fff;"><a href="{% url 'password_reset' %}" style="text-decoration: none;"> forgot password? </a></h6>
+                      {% comment %} <div class="form-input">
+                          <textarea name="w3lMessage" id="w3lMessage" placeholder="Your message here"
+                              required=""></textarea>
+                      </div> {% endcomment %}
+                      <div class="text-center">
+                          <button class="btn btn-style btn-primary">Login &rarr;</button>
+                      </div>
+                      <h6 class="mb-md-5 mb-4" style="margin-top: 1rem;font-size: 17px;text-align: left;">Don't have an account? <a href="{% url 'register' %}" style="text-decoration: none;"> Register </a></h6>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <!-- //contacts-5-grid -->
+  </div>
+</div>
+
+
+{% endblock %}

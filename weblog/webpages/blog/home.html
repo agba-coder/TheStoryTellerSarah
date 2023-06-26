@@ -1,0 +1,193 @@
+{% extends 'blog/base.html'%}
+{% load static %}
+
+{% block title %}Home {% endblock %}
+
+{% block content %}
+
+<section class="w3l-testimonials" id="testimonials">
+    <!-- main-slider -->
+    <div class="testimonials pt-2 pb-5">
+        <div class="container pb-lg-5">
+            <div class="owl-testimonial owl-carousel owl-theme mb-md-0 mb-sm-5 mb-4">
+                <!-- {% for post in rand_posts %} -->
+                <div class="item">
+                    <div class="row slider-info">
+                        <div class="col-lg-8 message-info align-self">
+                            <span class="label-blue mb-sm-4 mb-3">Intro About me!</span>
+                            <h3 class="title-big mb-4">Hi there!, Welcome Back..
+                            </h3>
+                            <p class="message">Hi am Omotayo Alade Sarah and am a blogger of the famous thestorytellersarah.</p>
+                        </div>
+                        <div class="col-lg-4 col-md-8 img-circle mt-lg-0 mt-4">
+                            <img src="{% static 'images/author.jpg' %}" class="img-fluid radius-image-full" alt="image">
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="row slider-info">
+                        <div class="col-lg-8 message-info align-self">
+                            <span class="label-blue mb-sm-4 mb-3">Intro About me!</span>
+                            <h3 class="title-big mb-4">Hi there!, Welcome Back..
+                            </h3>
+                            <p class="message">Hi am Omotayo Alade Sarah and am a blogger of the famous thestorytellersarah.</p>
+                        </div>
+                        <div class="col-lg-4 col-md-8 img-circle mt-lg-0 mt-4">
+                            <img src="{% static 'images/Omotayo.jpg' %}" class="img-fluid radius-image-full" alt="image">
+                        </div>
+                    </div>
+                </div>
+                <!-- {% endfor %} -->
+            </div>
+        </div>
+    </div>
+    <!-- /main-slider -->
+</section>
+<div class="w3l-homeblock2 py-5">
+    <div class="container py-lg-5 py-md-4">
+        <!-- block -->
+        <div class="row">
+            <div class="col-lg-8">
+                <h3 class="section-title-left mb-4"> Editor's Pick </h3>
+                <div class="row">
+                    {% for post in rand_posts %}
+                    <div class="col-lg-6 col-md-6 mt-md-0 mt-sm-5 mt-4">
+                            <div class="card">
+                                <div class="card-header p-0 position-relative">
+                                    <a href="{% url 'blog_post' post.category.slug post.slug %}">
+                                        <img class="card-img-bottom d-block radius-image-full"
+                                            src="{{post.image.url}}" alt="Card image cap">
+                                    </a>
+                                </div>
+                                <div class="card-body blog-details">
+                                    <span class="label-blue">{{post.category}}</span>
+                                    <a href="{% url 'blog_post' post.category.slug post.slug %}" class="blog-desc">{{post.title}}
+                                    </a>
+                                    <p>{{post.intro}}.</p>
+                                    <div class="author align-items-center mt-3 mb-1">
+                                        <img src="{% static 'images/Omotayo.jpg' %}" alt="" class="img-fluid rounded-circle" />
+                                        <ul class="blog-meta">
+                                            <li>
+                                                <a href="#">The Story Teller Sarah</a> </a>
+                                            </li>
+                                            <li class="meta-item blog-lesson">
+                                                <span class="meta-value"> {{post.date_created | timesince}} </span>. <span
+                                                    class="meta-value ml-2"><span class="fa fa-clock-o"></span> {{post.read_duration_in_minutes}} min</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+                {% comment %} Use this for advertise or sponsorship or even annnouncememt {% endcomment %}
+                <div class="mt-4 left-right bg-clr-white p-3">
+                    <h3 class="section-title-left align-self pl-2 mb-sm-0 mb-3">Advertise with us </h3>
+                    <a class="btn btn-style btn-primary" href="{% url 'contact' %}">Learn more</a>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+<div class="w3l-homeblock2 py-5">
+        <div class="container py-lg-5 py-md-4">
+            <!-- block -->
+            <div class="left-right">
+                <h3 class="section-title-left mb-sm-4 mb-2"> Top Pick's of this month</h3>
+                <a href="#" class="more btn btn-small mb-sm-0 mb-4">View more</a>
+            </div>
+            <div class="row">
+                {% for post in posts %}
+                <div class="col-lg-4 col-md-6 item">
+                    <div class="card">
+                        <div class="card-header p-0 position-relative">
+                            <a href="#blog-single.html">
+                                <img class="card-img-bottom d-block radius-image-full" src="{{post.image.url}}"
+                                    alt="Card image cap">
+                            </a>
+                        </div>
+                        <div class="card-body blog-details">
+                            <a href="{% url 'blog_post' post.category.slug post.slug %}" class="blog-desc">{{post.title}}
+                            </a>
+                            <div class="author align-items-center">
+                                <img src="{% static 'images/Omotayo.jpg' %}" alt="" class="img-fluid rounded-circle" />
+                                <ul class="blog-meta">
+                                    <li>
+                                        <a href="#">The Story Teller Sarah</a> </a>
+                                    </li>
+                                    <li class="meta-item blog-lesson">
+                                        <span class="meta-value"> {{post.date_created | timesince }} </span>. <span
+                                            class="meta-value ml-2"><span class="fa fa-clock-o"></span> {{post.read_duration_in_minutes}} min</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+<div class="w3l-homeblock2 w3l-homeblock6 py-5">
+    <div class="container-fluid px-sm-5 py-lg-5 py-md-4">
+        <!-- block -->
+            <h3 class="section-title-left mb-4"> Trending Now</h3>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="bg-clr-white hover-box">
+                    <div class="row">
+                        {% for post in trending_post %}
+                        <div class="col-sm-6 position-relative">
+                            <a href="{% url 'blog_post' post.category.slug post.slug %}">
+                                <img class="card-img-bottom d-block radius-image-full" src="{{post.image.url}}"
+                                    alt="Card image cap">
+                            </a>
+                        </div>
+                        <div class="col-sm-6 card-body blog-details align-self">
+                            <span class="label-blue">{{post.category}}</span>
+                            <a href="#blog-single.html" class="blog-desc">{{post.title}}.
+                            </a>
+                            <p>{{post.intro}}.</p>
+                            <div class="author align-items-center mt-3">
+                                <img src="{% static 'images/Omotayo.jpg' %}" alt="" class="img-fluid rounded-circle" />
+                                <ul class="blog-meta">
+                                    <li>
+                                        <a href="author.html">The Story Teller Sarah</a> </a>
+                                    </li>
+                                    <li class="meta-item blog-lesson">
+                                        <span class="meta-value"> {{post.date_created | timesince }} </span>. <span
+                                            class="meta-value ml-2"><span class="fa fa-clock-o"></span> {{post.read_duration_in_minutes}} min</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="w3l-subscribe py-5">
+    <div class="container py-lg-5 py-md-4">
+        <div class="w3l-subscribe-content text-center bg-clr-white py-md-5 py-2">
+            <div class="py-5">
+                <h3 class="section-title-left mb-2">Subscribe to our newsletter!</h3>
+                <p class="mb-md-5 mb-4">Be the first to get notified each time I post on my blog. </p>
+                <form action="{% url 'home' %}" method="POST" class="subscribe">
+                    {% csrf_token %}
+                    <input type="email" class="subscribe_input" name="email" placeholder="Email address" required="">
+                    <button class="btn btn-style btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+GROUP A
+
+Project - 0
+presentation - 0
+UI/UX - 0
+Demonstration - 0
+
+
+
+GROUP B
+
+Project - 6
+presentation - 5
+UI/UX - 3
+Demonstration - 5
+
+GROUP C
+
+Project - 0
+presentation - 0
+UI/UX - 0
+Demonstration - 0
