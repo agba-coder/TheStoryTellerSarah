@@ -9,6 +9,7 @@ urlpatterns = [
     path('contact-me', views.contact, name='contact'),
     path('<slug:category_slug>/<slug:slug>/', views.blog_post, name="blog_post"),
     path('<slug:slug>/', views.category, name="category_detail"),
+    path('favicon.ico', lambda _ : redirect('static/images/favicon.ico', permanent=True)),
     
 ]
 

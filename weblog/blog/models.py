@@ -3,61 +3,62 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class PeopleWhoVistedYourSite(models.Model):
-    ip_address = models.GenericIPAddressField(editable=True, unique=True)
-    # city = models.CharField(editable=False)
-    # country = models.CharField(editable=False)
-    date_visted = models.DateTimeField(auto_now_add=True)
-    
-    # def __str__(models.Model):
-    #     return f"{self.city}, {self.country}"
-    
-    # class Meta:
-    #     ordering = ("-date_visited",)
+# class PeopleWhoVistedYourSite(models.Model):
+#     ip_address = models.GenericIPAddressField(editable=True, unique=True)
+#     city = models.CharField(editable=False)
+#     country = models.CharField(editable=False)
+#     timestamp = models.DateTimeField(auto_now_add=True)
+
+#     # def __str__(models.Model):
+#     #     return f"{self.city}, {self.country}"
+
+#     # class Meta:
+#     #     ordering = ("-date_visited",)
 
 
 class Tag(models.Model):
     hash_tag = models.CharField(max_length=100)
-    
+
     def __str__(self):
         return f"#{self.hash_tag}"
 
 class Category(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField()
-    
+    date_created = models.DateTimeField(auto_now_add=True)
+
     class Meta:
         ordering = ('title',)
         verbose_name_plural = 'Categories'
-        
+
     def __str__(self):
-        return self.title 
+        return self.title
 
     def get_absolute_url(self):
         return "/%s/" % self.slug
 
 
 class Post(models.Model):
-    
-    ''' 
-    the ACTIVE & DRAFT functionalities is to determine if a 
-    blog post should or is posted or drafted
-    
+
     '''
-    
+    the ACTIVE & DRAFT functionalities is to determine if a
+    blog post should or is posted or drafted
+
+    '''
+
     ACTIVE = "posted"
     DRAFT = "draft"
     # TRENDING = "posted & added to trending"
-    
+
     # label that will show in the admin site
-    
+
     CHOICES_STATUS = (
         (ACTIVE, "Posted"),
         (DRAFT, "Add to Draft"),
         # (TRENDING, "Posted & Add to Trending"),
     )
-    
-    
+
+
     category = models.ForeignKey(Category, related_name="posts", on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     slug = models.SlugField()
@@ -68,25 +69,25 @@ class Post(models.Model):
     hash_tag = models.ForeignKey(Tag, related_name="post_tag", on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True, editable=True)
     status = models.CharField(max_length=26, choices=CHOICES_STATUS, default=ACTIVE)
-    
-    
+
+
     def __str__(self):
         return self.title
-    
+
     # to sort blog post by date created
     class Meta:
         ordering = ('-date_created',)
-    
+
     def get_absolute_url(self):
         return '/%s/%s/' % (self.category. slug,self.slug)
-        
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     email = models.EmailField()
     body = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return f"{self.name} commented '{self.body}' in {self.post}\n"
 
@@ -94,10 +95,10 @@ class Comment(models.Model):
 class Newsletter(models.Model):
     subscribed_email_address = models.EmailField(unique=True)
     date_subscribed = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return f"{self.subscribed_email_address}"
-    
+
     class Meta:
         ordering = ("-date_subscribed",)
 
@@ -112,7 +113,30 @@ class ReceivedMail(models.Model):
 
     def __str__(self):
         return f"A message from {self.email}"
-    
+
     class Meta:
         ordering = ("-date_received",)
         verbose_name_plural = 'Categories'
+
+
+class SocialLink(models.Model):
+    social_media = models.CharField(max_length=10, help_text="e.g Instagram")
+    link = models.URLField()
+
+    def __str__(self):
+        return self.social_media
+
+
+class Visitor(models.Model):
+    ip_address = models.GenericIPAddressField(editable=False)
+    city = models.CharField(max_length=100, blank=True, null=True, editable=False)
+    country = models.CharField(max_length=100, blank=True, null=True, editable=False)
+    blog_post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True, editable=False)
+
+    def __str__(self):
+        return f"{self.ip_address} - {self.city}, {self.country}"
+    
+    class Meta:
+        ordering = ("-timestamp",)
+        verbose_name_plural = "Vistors"

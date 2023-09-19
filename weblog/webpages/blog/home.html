@@ -10,14 +10,18 @@
     <div class="testimonials pt-2 pb-5">
         <div class="container pb-lg-5">
             <div class="owl-testimonial owl-carousel owl-theme mb-md-0 mb-sm-5 mb-4">
-                <!-- {% for post in rand_posts %} -->
                 <div class="item">
                     <div class="row slider-info">
                         <div class="col-lg-8 message-info align-self">
-                            <span class="label-blue mb-sm-4 mb-3">Intro About me!</span>
-                            <h3 class="title-big mb-4">Hi there!, Welcome Back..
+                            <span class="label-blue mb-sm-4 mb-3">Intro About Me!</span>
+                            {% if user.is_authenticated %}
+                            <h3 class="title-big mb-4">Hi {{request.user.first_name}}, Welcome Back!.
                             </h3>
-                            <p class="message">Hi am Omotayo Alade Sarah and am a blogger of the famous thestorytellersarah.</p>
+                            {% else %}
+                            <h3 class="title-big mb-4">Hi there, Welcome Back!.
+                            </h3>
+                            {% endif %}
+                            <p class="message">Welcome to the captivating story world of The Story Teller Sarah, where you'll embark on a journey through the rich experiences and tales of an ordinary Nigerian girl and beyond. Immerse yourself in an array of stories that traverse various sectors, offering you a non-stop reading adventure like no other. Get ready to be captivated, inspired, and entertained as you delve into the diverse narratives crafted by The Story Teller Sarah..</p>
                         </div>
                         <div class="col-lg-4 col-md-8 img-circle mt-lg-0 mt-4">
                             <img src="{% static 'images/author.jpg' %}" class="img-fluid radius-image-full" alt="image">
@@ -28,16 +32,20 @@
                     <div class="row slider-info">
                         <div class="col-lg-8 message-info align-self">
                             <span class="label-blue mb-sm-4 mb-3">Intro About me!</span>
-                            <h3 class="title-big mb-4">Hi there!, Welcome Back..
+                            {% if user.is_authenticated %}
+                            <h3 class="title-big mb-4">Hi {{request.user.first_name}}, Welcome Back!.
                             </h3>
-                            <p class="message">Hi am Omotayo Alade Sarah and am a blogger of the famous thestorytellersarah.</p>
+                            {% else %}
+                            <h3 class="title-big mb-4">Hi there, Welcome Back!.
+                            </h3>
+                            {% endif %}
+                            <p class="message">Welcome to the captivating story world of The Story Teller Sarah, where you'll embark on a journey through the rich experiences and tales of an ordinary Nigerian girl and beyond. Immerse yourself in an array of stories that traverse various sectors, offering you a non-stop reading adventure like no other. Get ready to be captivated, inspired, and entertained as you delve into the diverse narratives crafted by The Story Teller Sarah..</p>
                         </div>
                         <div class="col-lg-4 col-md-8 img-circle mt-lg-0 mt-4">
                             <img src="{% static 'images/Omotayo.jpg' %}" class="img-fluid radius-image-full" alt="image">
                         </div>
                     </div>
                 </div>
-                <!-- {% endfor %} -->
             </div>
         </div>
     </div>
@@ -71,8 +79,8 @@
                                                 <a href="#">The Story Teller Sarah</a> </a>
                                             </li>
                                             <li class="meta-item blog-lesson">
-                                                <span class="meta-value"> {{post.date_created | timesince}} </span>. <span
-                                                    class="meta-value ml-2"><span class="fa fa-clock-o"></span> {{post.read_duration_in_minutes}} min</span>
+                                                <span class="meta-value"> {{post.date_created | timesince}} ago</span>
+                                                <span class="meta-value ml-2"><span class="fa fa-clock-o"></span> {{post.read_duration_in_minutes}} min</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -81,12 +89,12 @@
                         </div>
                     {% endfor %}
                 </div>
-                
+
                 {% comment %} Use this for advertise or sponsorship or even annnouncememt {% endcomment %}
                 <div class="mt-4 left-right bg-clr-white p-3">
                     <h3 class="section-title-left align-self pl-2 mb-sm-0 mb-3">Advertise with us </h3>
                     <a class="btn btn-style btn-primary" href="{% url 'contact' %}">Learn more</a>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -127,7 +135,7 @@
                     </div>
                 </div>
                 {% endfor %}
-                
+
             </div>
         </div>
     </div>

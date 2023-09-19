@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-import os 
+import os
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,12 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY")
+# SECRET_KEY = "django-insecure-_oeu4ne2xe7vu)a*1sx24oq(p29^q1=mp%mt0d@8ni=z3v_*hy" #
+SECRET_KEY = config("SECRET_KEY") 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'thestorytellersarah.pythonanywhere.com', 'thestorytellersarah.mysql.pythonanywhere-services.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'thestorytellersarah.pythonanywhere.com']
+# ALLOWED_HOSTS = ["*"]
+
 
 
 # Application definition
@@ -36,14 +39,14 @@ INSTALLED_APPS = [
     # WEB APPS
     'blog.apps.BlogConfig',
     'authentication.apps.AuthenticationConfig',
-    
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # sitemaps
     'django.contrib.sitemaps',
     #'sslserver',
@@ -60,7 +63,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.common.BrokenLinkEmailsMiddleware',
     # thrid party packages
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 
@@ -92,6 +95,14 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.request",
+)
+
 WSGI_APPLICATION = 'weblog.wsgi.application'
 
 
@@ -109,10 +120,10 @@ WSGI_APPLICATION = 'weblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config("NAME"),
-        'USER': config("USER"),
-        'PASSWORD': config("PASSWORD"),
-        'HOST': config("HOST"),
+        'NAME': 'thestorytellersa$default',
+        'USER': 'thestorytellersa',
+        'PASSWORD': 'ta1kw1thtay0.xyz.DB',
+        'HOST': 'thestorytellersarah.mysql.pythonanywhere-services.com',
     }
 }
 
@@ -145,15 +156,17 @@ MANAGERS = [
 ADIMNS = MANAGERS
 
 
-LOGIN_URL = "authentication/login?next=home"
-LOGIN_REDIRECT = "home"
+LOGIN_URL = "/accounts/auth/login"
+# LOGIN_REDIRECT = "home"
 LOGOUT_URL = '/'
 LOGOUT_REDIRECT_URL = '/' #'auth/login/?next=/'
+
+PASSWORD_RESET_TIMEOUT = 1800 
 
 #EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
-# email 
+# email
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
@@ -180,11 +193,15 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+GEOIP_PATH = os.path.join(BASE_DIR, 'geoip/')
+GEOIP_COUNTRY = os.path.join(GEOIP_PATH, 'dbip-country-lite-2023-09.mmdb')
+GEOIP_CITY = os.path.join(GEOIP_PATH, 'dbip-city-lite-2023-09.mmdb')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

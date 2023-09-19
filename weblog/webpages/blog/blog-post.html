@@ -25,6 +25,13 @@
                     <li>
                         <p><span class="fa fa-clock-o"></span> <strong>{{post.read_duration_in_minutes}} min read</strong></p>
                     </li>
+                    <li>
+                        {% if visitors <= 1 %}
+                        <p><span class="fa fa-eye"></span> <strong>{{visitors}} View</strong></p>
+                        {% else %}
+                        <p><span class="fa fa-eye"></span> <strong>{{visitors}} Views</strong></p>
+                        {% endif %}
+                    </li>
                 </ul>
             </div>
         </div>
@@ -38,7 +45,9 @@
                 <div class="col-lg-8">
                     <div class="text11-content">
                         <h4 class="mt-sm-3"> {{post.title}}</h4>
-                        <p class="mt-4 mb-3">{{post.body}}.</p>
+                        <p class="mt-4 mb-3">{{post.intro}}.</p>
+                        <!--<br/>-->
+                        <p class="mt-4 mb-3">{{post.body}}</p>
                         {% comment %} <h5 class="quote">For dull and lifeless skin, mix apple juice with honey. Apply a thin layer to your face, and leave it for 5 minutes.
                             <footer class="blockquote-footer mt-3"> Kelvin edison </footer>
                         </h5> {% endcomment %}
@@ -49,10 +58,9 @@
                                 <li>
                                     <p class="m-0 mr-sm-4 mr-2">Tags :</p>
                                 </li>
+                                <!--<br/>-->
+                                <!--<br/>-->
                                 <li><a href="#url" class="btn-small">{{post.hash_tag}}</a></li>
-                                {% comment %} <br/>
-                                <br/>
-                                <li><a href="#url" class="btn-small">{{post.hash_tag}}</a></li> {% endcomment %}
 
                             </ul>
                             <ul class="column3 social m-0 p-0">
@@ -89,7 +97,7 @@
                                             alt="author image" class="img-fluid"></a>
                                     <div class="author-info">
                                         <a href="#author-name" class="author-name">The Story Teller Sarah</a>
-                                        <a href="www.instagram.com/invites/contact/?i=Incn2t1ahyln&utm_content=k526w4f" class="btn btn-outline-primary">Follow </a>
+                                        <a href="{{url}}" target="_blank" class="btn btn-outline-primary">Follow </a>
                                     </div>
                                 </div>
                                 <p class="mt-2">A story telling blog filled with stories, experiences, and lessons from a regular Nigerian Blogger, Alade Sarah Omotayo.</p>
@@ -118,6 +126,7 @@
                             </div>
                             {% for data in recent_posts %}
                             <article class="post">
+                                <!-- <figure class="post-thumb"><img src="{{data.image.url}}" alt="{{data.title}}"></figure> -->
                                 <figure class="post-thumb"><img src="{{data.image.url}}" alt=""></figure>
                                 <div class="text"><a href="{% url 'blog_post' post.category.slug data.slug %}">
                                     {{data.title}}</a>
@@ -145,7 +154,7 @@
                             {% comment %} <article class="post">
                                 <figure class="post-thumb"><img src="images/beauty2.jpg" alt=""></figure>
                                 <div class="text"><a href="blog-single.html">
-                                        
+
 How to get Beautiful coloring Highlights this weak</a>
                                 </div>
                                 <div class="post-info">June 12, 2020</div>
@@ -203,7 +212,7 @@ How to get Beautiful coloring Highlights this weak</a>
                                 {% empty %}
                                     <p><strong> No comments yet!.. Be the first to comment.</strong></p>
                             {% endfor %}
-                            </div> 
+                            </div>
                         </div>
                             {% comment %} <div class="media-grid">
                                 <div class="media">
@@ -259,7 +268,7 @@ How to get Beautiful coloring Highlights this weak</a>
                                 <div class="form-group">
                                     {{form.body}}
                                 </div>
-                                
+
                             </div>
                             <div class="submit text-right">
                                 <button class="btn btn-style btn-primary">Post Comment</a>

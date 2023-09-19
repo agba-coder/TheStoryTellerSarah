@@ -38,10 +38,9 @@ handler500 = "blog.views.handler500"
 
 
 urlpatterns = [
+    # path('favicon.ico', lambda _ : redirect('static/images/favicon.ico', permanent=True)),
     path("sitemaps.xml", sitemap, {"sitemaps": sitemaps}),
     path('admin/', admin.site.urls),
-    
-    
     
     path('accounts/auth/password-reset/verify', 
         auth_views.PasswordResetView.as_view(
@@ -64,7 +63,8 @@ urlpatterns = [
          name='password_reset_complete'),
     
     path('', include('blog.urls')),
-    path('account/auth/', include('authentication.urls')),
+    path('accounts/auth/', include('authentication.urls')),
+    path('favicon.ico', lambda _ : redirect('static/images/favicon.ico', permanent=True)),
     
 ]
 

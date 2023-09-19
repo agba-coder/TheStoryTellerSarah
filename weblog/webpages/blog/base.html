@@ -63,27 +63,28 @@
 					</li>
 
           {% if user.is_authenticated %}
+
           <li class="nav-item">
-						<a class="nav-link" href="{% url 'home' %}">Hello, {{request.user.username}}!</a>
-					</li>
-					<li class="nav-item dropdown @@pages__active">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							More <span class="fa fa-angle-down"></span>
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item @@fa__active" href="{% url 'contact' %}">Contact</a>
-							<a class="dropdown-item @@fa__active" href="{% url 'logout' %}">Logout</a>
-						</div>
-					</li>
+            <a class="nav-link" href="{% url 'home' %}">Hello, {{request.user.username}}!</a>
+          </li>
+          <li class="nav-item dropdown @@pages__active">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              More <span class="fa fa-angle-down"></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item @@fa__active" href="{% url 'contact' %}">Contact</a>
+              <a class="dropdown-item @@fa__active" href="{% url 'logout' %}">Logout</a>
+            </div>
+          </li>
 
           {% else %}
           <li class="nav-item @@contact__active">
-						<a class="nav-link" href="{% url 'login' %}">Sign In</a>
-					</li>
-					<li class="nav-item @@contact__active">
-						<a class="nav-link" href="{% url 'login' %}">Welcome Guest!</a>
-					</li>
+            <a class="nav-link" href="{% url 'login' %}">Sign In</a>
+          </li>
+          <li class="nav-item @@contact__active">
+            <a class="nav-link" href="{% url 'login' %}">Welcome Guest!</a>
+          </li>
           
           {% endif %}
 				</ul>
@@ -124,7 +125,6 @@
               <a class="navbar-brand mb-3" href="/">
                 <span class="fa fa-newspaper-o"></span> The Story Teller Sarah</a>
               <p class="copy-footer-28"> © 2023. All Rights Reserved. </p>
-              <h5 class="mt-2">Designed by <a href="https://www.w3layouts.com/">W3 Layouts</a></h5>
               <h5 class="mt-2">Developed by <a href="https://twitter.com/iamAgba_Coder">Favour Bamgboye</a></h5>
             </div>
             <div class="col-lg-8 row">
